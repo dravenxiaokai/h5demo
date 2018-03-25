@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            border: 3px dashed #ccc;
+            width: 450px;
+            height: 160px;
+        }
+
+        div img {
+            margin: 3px;
+            width: 120px;
+            height: 90px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p>图片源</p>
+        <img src="img/01.jpg" id="img1" draggable="true">
+        <img src="img/02.jpg" id="img2" draggable="true">
+        <img src="img/03.jpg" id="img3" draggable="true">
+    </div>
+    <div id="d2">
+        <p>拖动目的地</p>
+    </div>
+
+    <script>
+        var imgList = document.getElementsByTagName('img');
+        for (var i = 0; i < 3; i++) {
+            imgList[i].ondragstart = function (e) {
+                // this.setCapture && this.setCapture();
+                e.dataTransfer.setData('text', e.target.id);
+            }
+        }
+        var div2 = document.getElementById('d2');
+        div2.ondragenter = function (e) {
+            e.preventDefault();
+        }
+        div2.ondragover = function (e) {
+            e.preventDefault();
+        }
+        // div2.onmousedown = function(e){
+        //     this.setCapture && this.setCapture();
+        // }
+        // div2.onmouseup = function(e){
+        //     this.releaseCapture && this.releaseCapture();
+        // }
+        div2.ondrop = function (e) {
+            // e.preventDefault();
+            var id = e.dataTransfer.getData('text');
+            var img = document.getElementById(id);
+            this.appendChild(img);
+        }
+    </script>
+</body>
+
+</html>
