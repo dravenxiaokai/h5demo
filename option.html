@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form action="">
+        <select id="gameType" onchange="changeGame()">
+            <option>--游戏分类--</option>
+        </select>
+        <select id="gameList">
+            <option>--游戏名称--</option>
+        </select>
+    </form>
+    <script>
+        var game = new Array();
+        game['纸牌游戏'] = ['斗地主', '扎金花', '拖拉机', '三打哈'];
+        game['棋类游戏'] = ['五子棋', '军棋', '中国象棋', '围棋'];
+        game['其他游戏'] = ['LOL', '魔兽世界', '阴阳师', '王者荣耀'];
+
+        function changeGame() {
+            var gameType = document.querySelector('#gameType').value;
+            var gameList = document.querySelector('#gameList');
+            gameList.options.length = 0;
+            for (var i in game) {
+                if (i == gameType) {
+                    for (var j in game[i]) {//j?
+                        gameList.add(new Option(game[i][j]), null);
+                    }
+                }
+            }
+
+        }
+
+        function allGame() {
+            var gameType = document.getElementById('gameType');
+            for (var i in game) {//指针
+                gameType.add(new Option(i, i), null);//<option value=i>显示文字(i)</option>
+            }
+        }
+        window.onload = allGame();
+
+    </script>
+</body>
+
+</html>
